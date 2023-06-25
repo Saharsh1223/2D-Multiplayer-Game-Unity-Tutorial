@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
 	private float horizontalInput;
 
 	private KeyCode jumpKey = KeyCode.Space;
-	private bool isFlipped = false;
 
 	private void Update()
 	{
@@ -50,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
 			rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
 		}
 
-		pv.RPC("Flip", RpcTarget.All);
+		Flip();
 		HandleAnimations();
 	}
 	
@@ -80,28 +79,17 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 	
-	[PunRPC]
 	private void Flip()
 	{
-		if (!isFlipped)
+		if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
 		{
-			if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-			{
-				isFacingRight = false;
-			}
-
-			isFlipped = true;
+			isFacingRight = false;
 		}
 
-        if (isFlipped)
-        {
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                isFacingRight = true;
-            }
-
-            isFlipped = false;
-        }
+		if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+		{
+			isFacingRight = true;
+		}
 	}
 	
 	private void FixedUpdate()
