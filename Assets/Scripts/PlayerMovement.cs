@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
 public class PlayerMovement : MonoBehaviour
 {
 	[Header("References")]
-	public PhotonView pv;
 	public Rigidbody2D rb;
 	public Transform groundCheck;
 	public LayerMask groundMask;
